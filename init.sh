@@ -1,6 +1,7 @@
 sudo rm /etc/nginx/sites-enabled/default
-sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
-sudo /etc/init.d/nginx restart
-sudo ln -sf /home/box/web/etc/gunicorn-wsgi.conf /etc/gunicorn.d/test-wsgi
-sudo ln -sf /home/box/web/etc/gunicorn-django.conf /etc/gunicorn.d/test-django
-sudo /etc/init.d/gunicorn restart
+echo "REMOVE default config"
+sudo cp ./etc/server.conf /etc/nginx/sites-enabled/
+echo "COPY CONFIG"
+sudo service nginx reload
+echo "NGINX RELOADED"
+cd ask && gunicorn --bind=0.0.0.0:8000 --log-level=debug --workers=2 --timeout=15 ask.wsgi
