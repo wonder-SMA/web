@@ -11,7 +11,7 @@ def test(request, *args, **kwargs):
 def question_details(request, pk):
     question = get_object_or_404(Question, pk=pk)
     answers = question.answer_set.all()
-    return render(reauest, 'question_details.html', {'question': question, 'answers': answers})
+    return render(request, 'question_details.html', {'question': question, 'answers': answers})
 
 def question_list(request):
     questions = Question.objects.new()
